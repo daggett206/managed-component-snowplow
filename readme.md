@@ -44,3 +44,23 @@ Find out more about Managed Components [here](https://blog.cloudflare.com/zaraz-
 ### Email `string`
 
 `customerEmail`, if set, will be sent to the collect endpoint as `uid` field.
+
+#### Fields being part of trackStructEvent, [official documentation](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/#trackstructevent)
+
+### Action `string`
+
+`event.payload.ecommerce.name`, name of the event.
+
+### Label `string`
+
+`payload.order_id || payload.product_id || payload.checkout_id`, label of the event.
+
+### Property `string`
+
+`payload.currency`, property of the event.
+
+### Value `string`
+
+`payload.value || payload.price || payload.total || payload.revenue`, value of the event.
+
+
