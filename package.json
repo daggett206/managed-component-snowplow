@@ -31,9 +31,5 @@
     "ts-node": "^10.8.0",
     "typescript": "^4.7.2",
     "vitest": "^0.13.0"
-  },
-  "dependencies": {
-    "sha1": "^1.1.1",
-    "uuid": "^9.0.0"
   }
 }

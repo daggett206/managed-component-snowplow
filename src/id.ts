@@ -1,18 +1,18 @@
 import {MCEvent} from "@managed-components/types";
 import {Id, TrackerSettings} from "./types";
-import {v4} from "uuid";
+import {uuidv4} from "./utils";
 
 export const getDefaultIdStructure = () => {
   const now = new Date();
   const nowTs = Math.round(now.getTime() / 1000);
   const structure = [];
 
-  structure[Id.UserId] = v4();
+  structure[Id.UserId] = uuidv4();
   structure[Id.CreateTs] = nowTs;
   structure[Id.VisitCount] = 0;
   structure[Id.NowTs] = nowTs;
   structure[Id.LastVisitTs] = '';
-  structure[Id.SessionId] = v4();
+  structure[Id.SessionId] = uuidv4();
   structure[Id.PreviousSessionId] = '';
   structure[Id.FirstEventId] = '';
   structure[Id.FirstEventTs] = '';
@@ -42,7 +42,7 @@ export const updatePreviousSessionId = (structure: (string | number)[]) => {
 };
 
 export const updateSessionId = (structure: (string | number)[]) => {
-  structure[Id.SessionId] = v4();
+  structure[Id.SessionId] = uuidv4();
   return structure;
 };
 

@@ -1,6 +1,6 @@
 # Snowplow Managed Component
 
-A simplified implementation of the snowplow library for tracking web events.
+Simplified implementation of **snowplow** library for tracking web events.
 <br>Supports working with cookies (_id, _ses) and sending ecommerce events.
 
 Find out more about Managed Components [here](https://blog.cloudflare.com/zaraz-open-source-managed-components-and-webcm/) for inspiration and motivation details.
@@ -43,9 +43,9 @@ Find out more about Managed Components [here](https://blog.cloudflare.com/zaraz-
 
 ### Email `string`
 
-`customerEmail`, if set, will be sent to the collect endpoint as `uid` field.
+`customerEmail`, if set, will be sent to the collector endpoint as `uid` field.
 
-#### Fields being part of trackStructEvent, [official documentation](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/#trackstructevent)
+#### Fields that are part of a trackStructEvent, [official documentation](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/#trackstructevent)
 
 ### Action `string`
 

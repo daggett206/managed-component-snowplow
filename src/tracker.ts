@@ -102,8 +102,6 @@ export class Tracker {
       }),
     };
 
-    console.log('Fetch props', JSON.stringify(props, null, 2));
-
     return fetch(
       `${this.core.getSettings().endpoint}/com.snowplowanalytics.snowplow/tp2`,
       props,

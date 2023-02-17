@@ -1,6 +1,6 @@
 import {MCEvent} from "@managed-components/types";
 import {EventType, TrackerSettings} from "./types";
-import {v4} from "uuid";
+import {uuidv4} from "./utils";
 
 export const createPayloadBuilder = (event: MCEvent, settings: TrackerSettings) => {
   const builder = {
@@ -15,7 +15,7 @@ export const createPayloadBuilder = (event: MCEvent, settings: TrackerSettings) 
         refr: event.client.referer,
         uid: obj.uid,
         page: event.client.title,
-        eid: v4(),
+        eid: uuidv4(),
         tv: "zaraz-1.0.0",
         tna: settings.namespace,
         aid: settings.appId,
