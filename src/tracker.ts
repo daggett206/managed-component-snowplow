@@ -102,10 +102,11 @@ export class Tracker {
       }),
     };
 
-    return fetch(
-      `${this.core.getSettings().endpoint}/com.snowplowanalytics.snowplow/tp2`,
-      props,
-    )
+    return this.core.getManager()
+      .fetch(
+        `${this.core.getSettings().endpoint}/com.snowplowanalytics.snowplow/tp2`,
+        props,
+      )
       .catch((err) => {
         console.error(`Tracker.track() error:`, err);
       });
