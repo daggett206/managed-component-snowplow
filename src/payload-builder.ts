@@ -69,9 +69,7 @@ export const createPayloadBuilder = (event: MCEvent, settings: TrackerSettings) 
           "data": {"id": pageViewId}
         }]
       };
-      return Buffer
-        .from(JSON.stringify(data))
-        .toString('base64');
+      return btoa(JSON.stringify(data));
     }
   };
 
