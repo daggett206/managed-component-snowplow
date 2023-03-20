@@ -20,7 +20,7 @@ export const createPageManager = (event: MCEvent, settings: TrackerSettings) => 
       event.client.set(key, value, {scope: 'page'});
     },
     get: (key: PageVariable): string => {
-      return event.client.get(key);
+      return event.client.get(key) || '';
     },
   };
 

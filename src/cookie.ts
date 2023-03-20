@@ -11,7 +11,7 @@ export const createCookieManager = (event: MCEvent, settings: TrackerSettings) =
       event.client.set(`${namespace}_${name}.${domainHash}`, value, opts);
     },
     get: (name): string => {
-      return event.client.get(`${namespace}_${name}.${domainHash}`);
+      return event.client.get(`${namespace}_${name}.${domainHash}`) || '';
     },
   };
 }

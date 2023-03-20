@@ -1,5 +1,4 @@
 import { MCEvent } from '@managed-components/types';
-import * as crypto from 'crypto';
 
 export const getDomainHash = str => {
   const characters = "abcdefghijklmnopqrstuvwxyz0123456789";

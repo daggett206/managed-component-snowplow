@@ -1,5 +1,7 @@
 import {ComponentSettings, Manager} from "@managed-components/types";
 
+export type IdStructure = (string | number)[];
+
 export enum Id {
   UserId,
   CreateTs,
