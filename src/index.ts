@@ -4,7 +4,7 @@ import {CreateTrackerCoreOptions} from "./types";
 import {Tracker} from "./tracker";
 
 export default async function (manager: Manager, settings: ComponentSettings) {
-  const core = createCore({settings} as CreateTrackerCoreOptions);
+  const core = createCore({settings, manager} as CreateTrackerCoreOptions);
 
   manager.addEventListener('pageview', async (event) => {
     const tracker = new Tracker(core, event);

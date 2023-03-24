@@ -7,11 +7,11 @@ export const createCookieManager = (event: MCEvent, settings: TrackerSettings) =
   const domainHash = getDomainHash(event.client.url.hostname + '/');
 
   return {
-    set: (name, value, opts?: ClientSetOptions) => {
+    set: (name, value, opts?: ClientSetOptions): void => {
       event.client.set(`${namespace}_${name}.${domainHash}`, value, opts);
     },
-    get: (name) => {
-      return event.client.get(`${namespace}_${name}.${domainHash}`);
+    get: (name): string => {
+      return event.client.get(`${namespace}_${name}.${domainHash}`) || '';
     },
   };
 }

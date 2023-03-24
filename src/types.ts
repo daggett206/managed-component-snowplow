@@ -1,4 +1,6 @@
-import {ComponentSettings} from "@managed-components/types";
+import {ComponentSettings, Manager} from "@managed-components/types";
+
+export type IdStructure = (string | number)[];
 
 export enum Id {
   UserId,
@@ -22,6 +24,7 @@ export interface TrackerSettings extends ComponentSettings {
 
 export interface CreateTrackerCoreOptions {
   settings: TrackerSettings;
+  manager: Manager;
 }
 
 export type EventType =
