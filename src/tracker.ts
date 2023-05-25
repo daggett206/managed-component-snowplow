@@ -88,7 +88,6 @@ export class Tracker {
   private initId() {
     this.id.update(
       () => this.id.parse(this.cookie.get('id')),
-      updateNowTs(),
     );
 
     const isFirstSession = !this.cookie.get('id') && !this.cookie.get('ses');
@@ -114,6 +113,10 @@ export class Tracker {
       );
       return;
     }
+
+    this.id.update(
+      updateNowTs(),
+    );
   }
 
   private updateCookies() {
