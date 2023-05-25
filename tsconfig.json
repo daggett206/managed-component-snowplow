@@ -1,16 +1,8 @@
 {
   "include": [
-    "types/**/*.d.ts"
+    "src/**/*.ts"
   ],
   "compilerOptions": {
-    "paths": {
-      "@snowplow/tracker-core": ["./snowplow-javascript-tracker/libraries/tracker-core/src/index.ts"],
-      "@snowplow/browser-tracker-core": ["./snowplow-javascript-tracker/libraries/browser-tracker-core/src/index.ts"],
-      "@snowplow/browser-plugin-*": ["./snowplow-javascript-tracker/plugins/browser-plugin-*/src/index.ts"],
-      "@snowplow/node-tracker": ["./snowplow-javascript-tracker/trackers/node-tracker/src/index.ts"],
-      "@snowplow/browser-tracker": ["./snowplow-javascript-tracker/trackers/browser-tracker/src/index.ts"],
-      "@snowplow/javascript-tracker": ["./snowplow-javascript-tracker/trackers/javascript-tracker/src/index.ts"],
-    },
 
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
