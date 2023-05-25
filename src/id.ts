@@ -1,5 +1,5 @@
 import {MCEvent} from "@managed-components/types";
-import {Id, TrackerSettings, IdStructure} from "./types";
+import {Id, TrackerSettings, IdStructure, IdUpdateFn} from "./types";
 import {uuidv4} from "./utils";
 
 export const getDefaultIdStructure = (): IdStructure => {
@@ -21,47 +21,47 @@ export const getDefaultIdStructure = (): IdStructure => {
   return structure;
 };
 
-export const incrementVisitCount = (structure: (string | number)[]): IdStructure => {
+export const incrementVisitCount: IdUpdateFn = () => (structure: (string | number)[]): IdStructure => {
   structure[Id.VisitCount] = Number(structure[Id.VisitCount] || 0) + 1;
   return structure;
 };
 
-export const updateNowTs = (structure: (string | number)[]): IdStructure => {
+export const updateNowTs: IdUpdateFn = () => (structure: (string | number)[]): IdStructure => {
   structure[Id.NowTs] = Math.round(new Date().getTime() / 1000);
   return structure;
 };
 
-export const updateLastVisitTs = (structure: IdStructure): IdStructure => {
+export const updateLastVisitTs: IdUpdateFn = () => (structure: IdStructure): IdStructure => {
   structure[Id.LastVisitTs] = structure[Id.NowTs];
   return structure;
 };
 
-export const updatePreviousSessionId = (structure: IdStructure): IdStructure => {
+export const updatePreviousSessionId: IdUpdateFn = () => (structure: IdStructure): IdStructure => {
   structure[Id.PreviousSessionId] = structure[Id.SessionId];
   return structure;
 };
 
-export const updateSessionId = (structure: IdStructure): IdStructure => {
+export const updateSessionId: IdUpdateFn = () => (structure: IdStructure): IdStructure => {
   structure[Id.SessionId] = uuidv4();
   return structure;
 };
 
-export const updateFirstEventId = (value = '') => (structure: IdStructure): IdStructure => {
+export const updateFirstEventId: IdUpdateFn = (value = '') => (structure: IdStructure): IdStructure => {
   structure[Id.FirstEventId] = value;
   return structure;
 };
 
-export const updateFirstEventTs = (value = '') => (structure: IdStructure): IdStructure => {
+export const updateFirstEventTs: IdUpdateFn = (value = '') => (structure: IdStructure): IdStructure => {
   structure[Id.FirstEventTs] = value;
   return structure;
 };
 
-export const updateEventIndex = (structure: IdStructure, value = 0): IdStructure => {
+export const updateEventIndex: IdUpdateFn = () => (structure: IdStructure, value = 0): IdStructure => {
   structure[Id.EventIndex] = value;
   return structure;
 };
 
-export const incrementEventIndex = (structure: IdStructure): IdStructure => {
+export const incrementEventIndex: IdUpdateFn = () => (structure: IdStructure): IdStructure => {
   structure[Id.EventIndex] = Number(structure[Id.EventIndex] || 0) + 1;
   return structure;
 };
@@ -69,27 +69,27 @@ export const incrementEventIndex = (structure: IdStructure): IdStructure => {
 export const createIdManager = (event: MCEvent, settings: TrackerSettings) => {
   const structure: IdStructure = [];
   const manager = {
-    get structure() {
+    get structure(): IdStructure {
       return structure;
     },
-    get: (index: Id) => {
+    get: (index: Id): IdStructure[keyof IdStructure] | undefined => {
       return structure[index];
     },
-    set: (index: Id, value: string | number) => {
+    set: (index: Id, value: string | number): void => {
       structure[index] = value;
     },
-    parse: (id: string) => {
+    parse: (id: string): IdStructure => {
       const existing = (id || '').split('.');
       return getDefaultIdStructure()
         .map((defaultValue, index) => existing[index] || defaultValue);
     },
-    update: (...fns) => fns
+    update: (...fns: Array<ReturnType<IdUpdateFn>>): void => fns
       .reduce(
         (structure, fn) => fn(structure),
         structure.slice(),
       )
       .forEach((elem, index) => structure[index] = elem),
-    build: () => manager.structure.join('.'),
+    build: (): string => manager.structure.join('.'),
   };
 
   return manager;
