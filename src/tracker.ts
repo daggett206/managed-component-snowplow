@@ -34,42 +34,11 @@ export class Tracker {
   }
 
   public init() {
-    this.page.initVariables();
-
-    const id = this.cookie.get('id');
-    const ses = this.cookie.get('ses');
-
-    this.id.update(
-      () => this.id.parse(id),
-      updateNowTs,
-    );
+    this.initVariables();
+    this.initId();
     this.updateCookies();
 
-    const isFirstSession = !id && !ses;
-    if (isFirstSession) {
-      this.id.update(
-        incrementVisitCount,
-        updateNowTs,
-      );
-      this.updateCookies();
-      return;
-    }
-
-    const isSessionExpired = !ses;
-    if (isSessionExpired) {
-      this.id.update(
-        incrementVisitCount,
-        updateLastVisitTs,
-        updatePreviousSessionId,
-        updateSessionId,
-        updateNowTs,
-        updateFirstEventId(),
-        updateFirstEventTs(),
-        updateEventIndex,
-      );
-      this.updateCookies();
-      return;
-    }
+    return this;
   }
 
   public track(type: EventType) {
@@ -83,10 +52,10 @@ export class Tracker {
     });
 
     this.id.update(
-      updateNowTs,
+      updateNowTs(),
       updateFirstEventId(payload.eid),
       updateFirstEventTs(payload.dtm),
-      incrementEventIndex,
+      incrementEventIndex(),
     );
 
     this.updateCookies();
@@ -110,6 +79,41 @@ export class Tracker {
       .catch((err) => {
         console.error(`Tracker.track() error:`, err);
       });
+  }
+
+  private initVariables() {
+    this.page.initVariables();
+  }
+
+  private initId() {
+    this.id.update(
+      () => this.id.parse(this.cookie.get('id')),
+      updateNowTs(),
+    );
+
+    const isFirstSession = !this.cookie.get('id') && !this.cookie.get('ses');
+    if (isFirstSession) {
+      this.id.update(
+        incrementVisitCount(),
+        updateNowTs(),
+      );
+      return;
+    }
+
+    const isSessionExpired = !this.cookie.get('ses');
+    if (isSessionExpired) {
+      this.id.update(
+        incrementVisitCount(),
+        updateLastVisitTs(),
+        updatePreviousSessionId(),
+        updateSessionId(),
+        updateNowTs(),
+        updateFirstEventId(),
+        updateFirstEventTs(),
+        updateEventIndex(),
+      );
+      return;
+    }
   }
 
   private updateCookies() {
