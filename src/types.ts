@@ -15,6 +15,8 @@ export enum Id {
   EventIndex,
 }
 
+export type IdUpdateFn = (value?: string | undefined) => (structure: IdStructure) => IdStructure;
+
 export interface TrackerSettings extends ComponentSettings {
   appId: string;
   namespace: string;
