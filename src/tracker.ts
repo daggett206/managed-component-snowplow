@@ -64,6 +64,8 @@ export class Tracker {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-Forwarded-For': this.event.client.ip,
+        'User-Agent': this.event.client.userAgent,
       },
       body: JSON.stringify({
         schema: 'iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4',
