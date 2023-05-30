@@ -21,5 +21,5 @@ export const getEventPayloadValue = (event: MCEvent, key: string) => {
 };
 
 export const uuidv4 = () => {
-  return crypto.randomUUID()
+  return crypto.randomUUID();
 }

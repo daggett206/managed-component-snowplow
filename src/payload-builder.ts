@@ -58,7 +58,7 @@ export const createPayloadBuilder = (event: MCEvent, settings: TrackerSettings) 
     build: (object: Record<'type', EventType> & Record<string, any>) => {
       return Object.assign(
         builder.common(object),
-        builder[object.type.toLowerCase()]?.(object) || {},
+        builder[object.type?.toLowerCase()]?.(object) || {},
       );
     },
     getCx: (pageViewId: string) => {

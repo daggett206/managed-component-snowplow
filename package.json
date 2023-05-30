@@ -10,7 +10,7 @@
     "bundle": "node esbuild.js",
     "build": "run-s lint typecheck bundle",
     "typecheck": "tsc --project tsconfig.build.json --noEmit",
-    "test": "vitest run --globals",
+    "test": "npm run test:jest",
     "test:dev": "vitest --globals",
     "test:jest": "jest --config=jest.config.js",
     "release": "npm run build && npm version patch && npm publish"
