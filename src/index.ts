@@ -19,4 +19,11 @@ export default async function (manager: Manager, settings: ComponentSettings) {
       .init()
       .track('ecommerce'),
   );
+
+  manager.addEventListener(
+    'event', 
+    async (event) => new Tracker(core, event)
+      .init()
+      .track('event'),
+  );
 }
