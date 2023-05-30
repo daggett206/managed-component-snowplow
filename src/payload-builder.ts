@@ -39,9 +39,12 @@ export const createPayloadBuilder = (event: MCEvent, settings: TrackerSettings) 
         e: 'pv',
       };
     },
+    event: (obj) => {
+      return builder.ecommerce(obj);
+    },
     ecommerce: (obj) => {
-      const payload = event.payload.ecommerce;
-      const action = event.name || event.payload.name;
+      const payload = event.payload.ecommerce || event.payload;
+      const action = event.name || event.payload.name || event.payload.ecommerce.name;
       const category = 'ecom';
       const label = payload.order_id || payload.product_id || payload.checkout_id;
       const property = payload.currency;
