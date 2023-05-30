@@ -43,7 +43,7 @@ export const createPayloadBuilder = (event: MCEvent, settings: TrackerSettings) 
       return builder.ecommerce(obj);
     },
     ecommerce: (obj) => {
-      const payload = event.payload.ecommerce;
+      const payload = event.payload.ecommerce || event.payload;
       const action = event.name || event.payload.name || event.payload.ecommerce.name;
       const category = 'ecom';
       const label = payload.order_id || payload.product_id || payload.checkout_id;
