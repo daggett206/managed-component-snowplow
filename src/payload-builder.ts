@@ -40,7 +40,10 @@ export const createPayloadBuilder = (event: MCEvent, settings: TrackerSettings) 
       };
     },
     event: (obj) => {
-      return builder.ecommerce(obj);
+      return {
+        ...builder.ecommerce(obj),
+        se_ac: event.payload.evt,
+      };
     },
     ecommerce: (obj) => {
       const payload = event.payload.ecommerce || event.payload;

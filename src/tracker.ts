@@ -51,6 +51,8 @@ export class Tracker {
       cx: this.payload.getCx(this.page.get('pvid')),
     });
 
+    console.log('Going to track', type);
+
     this.id.update(
       updateNowTs(),
       updateFirstEventId(payload.eid),
@@ -73,8 +75,9 @@ export class Tracker {
       }),
     };
 
-    return this.core.getManager()
-      .fetch(
+    console.log('Going to fetch', props)
+
+    return fetch(
         `${this.core.getSettings().endpoint}/com.snowplowanalytics.snowplow/tp2`,
         props,
       )

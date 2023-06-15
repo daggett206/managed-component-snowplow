@@ -6,24 +6,25 @@ import {Tracker} from "./tracker";
 export default async function (manager: Manager, settings: ComponentSettings) {
   const core = createCore({settings, manager} as CreateTrackerCoreOptions);
 
-  manager.addEventListener(
-    'pageview', 
-    async (event) => new Tracker(core, event)
+  const track = (event, name) => {
+    return new Tracker(core, event)
       .init()
-      .track('pageview'),
+      .track(name)
+  }
+
+  manager.addEventListener(
+    'pageview',
+    async (event) => track(event, 'pageview'),
   );
 
   manager.addEventListener(
-    'ecommerce', 
-    async (event) => new Tracker(core, event)
-      .init()
-      .track('ecommerce'),
+    'ecommerce',
+    async (event) => track(event, 'ecommerce'),
   );
 
+  // this listener doesn't see zaraz.track('Stylecreator Viewed') event
   manager.addEventListener(
     'event', 
-    async (event) => new Tracker(core, event)
-      .init()
-      .track('event'),
+    async (event) => track(event, 'event'),
   );
 }
