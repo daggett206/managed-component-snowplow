@@ -77,7 +77,8 @@ export class Tracker {
 
     console.log('Going to fetch', props)
 
-    return fetch(
+    return this.core.getManager()
+      .fetch(
         `${this.core.getSettings().endpoint}/com.snowplowanalytics.snowplow/tp2`,
         props,
       )
