@@ -31,13 +31,13 @@ describe('createPageManager', () => {
     const pageManager = createPageManager(ev, {} as any);
     pageManager.initVariables();
     expect(mockClient.set).toHaveBeenCalledWith('pvid', expect.any(String), { scope: 'page' });
-    expect(mockClient.set).toHaveBeenCalledWith('email', 'test@example.com', { scope: 'page' });
+    expect(mockClient.set).toHaveBeenCalledWith('uid', 'test@example.com', { scope: 'page' });
   });
 
   it('should not set an "email" variable if it already exists in the client object', () => {
     mockClient.get.mockReturnValueOnce('test@example.com');
     const pageManager = createPageManager(mockEvent, {} as any);
-    pageManager.set('email', 'test@example.com');
+    pageManager.set('uid', 'test@example.com');
     expect(mockClient.set).not.toHaveBeenCalled();
   });
 });

@@ -47,7 +47,7 @@ export class Tracker {
       duid: this.id.get(Id.UserId),
       vid: this.id.get(Id.VisitCount),
       sid: this.id.get(Id.SessionId),
-      uid: this.page.get('email'),
+      uid: this.page.get('uid'),
       cx: this.payload.getCx(this.page.get('pvid')),
     });
 

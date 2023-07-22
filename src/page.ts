@@ -4,17 +4,17 @@ import {getEventPayloadValue, uuidv4} from "./utils";
 
 export type PageVariable =
   | 'pvid'
-  | 'email'
+  | 'uid'
 ;
 
 export const createPageManager = (event: MCEvent, settings: TrackerSettings) => {
   const manager = {
     initVariables: () => {
       manager.set('pvid', uuidv4());
-      manager.set('email', getEventPayloadValue(event, 'customerEmail'));
+      manager.set('uid', getEventPayloadValue(event, 'customerEmail'));
     },
     set: (key: PageVariable, value: string): void => {
-      if (event.client.get(key)) {
+      if (event.client.get(key) && event.client.get(key) !== 'null') {
         return;
       }
       event.client.set(key, value, {scope: 'page'});
