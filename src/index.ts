@@ -17,3 +17,4 @@ export default async function (manager: Manager, settings: ComponentSettings) {
     ),
   );
 }
+export {healthCheck} from "./health";
